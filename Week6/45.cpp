@@ -16,17 +16,17 @@ class Node {
 Node* removeRange(Node* root, int low, int high){
     if(!root)
         return NULL;
-    Node *left = removeRange(root->left, low, high);
-    Node *right = removeRange(root->right, low, high);
+    root->left = removeRange(root->left, low, high);
+    root->right = removeRange(root->right, low, high);
     
     if(root->data < low){
         Node* rST = root->right;
-        delete root;
+        free(root);
         return rST;
     }
     else if(root->data > high){
         Node *lST = root->left;
-        delete root;
+        free(root);
         return lST;
     }
     else
